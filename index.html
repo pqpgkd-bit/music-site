@@ -2,29 +2,55 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Music Auto Play</title>
+<title>Music Site</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+}
+
+#startBtn{
+    padding:20px 40px;
+    font-size:24px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+}
+</style>
+
 </head>
 
-<body style="margin:0; overflow:hidden; background:black;">
+<body>
 
-<audio id="bgm" autoplay loop>
-  <source src="https://drive.google.com/uc?export=download&id=1tQJfppJEigY_JMV3ZIJJSWrD21OSvlf5" type="audio/mpeg">
+<button id="startBtn">
+🎵 Bật nhạc
+</button>
+
+<audio id="bgm" loop>
+    <source src="https://drive.google.com/uc?export=download&id=1tQJfppJEigY_JMV3ZIJJSWrD21OSvlf5" type="audio/mpeg">
 </audio>
 
 <script>
 const audio = document.getElementById("bgm");
+const btn = document.getElementById("startBtn");
 
 audio.volume = 0.5;
 
-document.addEventListener("click", () => {
-    audio.play();
-}, { once: true });
-
-window.onload = () => {
-    audio.play().catch(() => {
-        console.log("Autoplay bị trình duyệt chặn");
-    });
-};
+btn.addEventListener("click", async () => {
+    try{
+        await audio.play();
+        btn.style.display = "none";
+    }catch(err){
+        alert("Trình duyệt chặn autoplay");
+    }
+});
 </script>
 
 </body>
