@@ -2,14 +2,30 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Background Music</title>
+<title>Music Auto Play</title>
 </head>
 
-<body style="margin:0; background:black; overflow:hidden;">
+<body style="margin:0; overflow:hidden; background:black;">
 
-<audio autoplay loop>
+<audio id="bgm" autoplay loop>
   <source src="https://drive.google.com/uc?export=download&id=1tQJfppJEigY_JMV3ZIJJSWrD21OSvlf5" type="audio/mpeg">
 </audio>
+
+<script>
+const audio = document.getElementById("bgm");
+
+audio.volume = 0.5;
+
+document.addEventListener("click", () => {
+    audio.play();
+}, { once: true });
+
+window.onload = () => {
+    audio.play().catch(() => {
+        console.log("Autoplay bị trình duyệt chặn");
+    });
+};
+</script>
 
 </body>
 </html>
